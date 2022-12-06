@@ -5,6 +5,8 @@ public class PlayerWeaponHandler : MonoBehaviour
 {
     [SerializeField] private UnityEvent _showAnimationShoot;
     [SerializeField] private UnityEvent<int> _setCountBullets;
+    [SerializeField] private UnityEvent _weaponShot;
+    
     
     [SerializeField] private PlayerWeapon _playerWeapon;
     [SerializeField] private int _startCountBullets = 30;
@@ -21,6 +23,7 @@ public class PlayerWeaponHandler : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && _currentCountBullets > 0)
         {
+            _weaponShot.Invoke();
             _showAnimationShoot.Invoke();
             _playerWeapon.Shoot();
 

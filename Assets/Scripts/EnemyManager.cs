@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -9,6 +8,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float _radius = 5;
     [SerializeField] private int _enemiesCount = 5;
     [SerializeField] private CountEnemyView _countEnemyView;
+    [SerializeField] private AudioSource _mouseDeathSound;
+    
 
     private List<Enemy> _enemies;
     public void Initialize(Transform enemiesTarget)
@@ -32,6 +33,7 @@ public class EnemyManager : MonoBehaviour
 
     private void OnEnemyDied(Enemy enemy)
     {
+        _mouseDeathSound.Play();
         _countEnemyView.OnEnemyDied();
         enemy.Died -= OnEnemyDied;
     }
