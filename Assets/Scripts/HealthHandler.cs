@@ -11,13 +11,10 @@ public class HealthHandler : MonoBehaviour
 
     private float _currentHealth;
 
-    private void Start()
+    public float Initialize()
     {
         _currentHealth = _startHealth;
-    }
-    
-    public float GetCurrentHealth()
-    {
+        
         return _currentHealth;
     }
     

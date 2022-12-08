@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class ListPlayers : MonoBehaviour
 {
-    [SerializeField] private Player[] _players;
+    [SerializeField] private PlayerAnimationHandler[] _players;
     [SerializeField] private float _rotationSpeed;
     
     private int _index;
-    private Player _currentPlayer;
+    private PlayerAnimationHandler _currentPlayer;
     
     private void Awake()
     {

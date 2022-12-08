@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private PlayerAimController _playerAimController;
     private HealthBarView _healthBarView;
     
-    private void Start()
+    private void Awake()
     {
         _movementHandler = GetComponent<PlayerMovementHandler>();
         _healthHandler = GetComponent<HealthHandler>();
@@ -22,7 +22,8 @@ public class Player : MonoBehaviour
         _healthBarView = GetComponent<HealthBarView>();
         
         _healthHandler.Died += OnDied;
-        _healthBarView.Initialize(_healthHandler.GetCurrentHealth());
+        var startHealth = _healthHandler.Initialize();
+        _healthBarView.Initialize(startHealth);
         _healthHandler.GetDamage += _healthBarView.ChangeHealthBar;
     }
 
