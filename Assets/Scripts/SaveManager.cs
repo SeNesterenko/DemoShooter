@@ -1,12 +1,14 @@
+using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
+    [SerializeField] private UnityEvent<float> _changeOperationProgress;
     [SerializeField] private ListPlayers _listPlayers;
-    
     
     private string _dataPath;
 
@@ -32,8 +34,19 @@ public class SaveManager : MonoBehaviour
         
         DontDestroyOnLoad(this);
 
-        var sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(sceneIndex + 1);
+        StartCoroutine(LoadSceneAsync());
+    }
+
+    private IEnumerator LoadSceneAsync()
+    {
+        var sceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        var operation = SceneManager.LoadSceneAsync(sceneIndex);
+
+        while (!operation.isDone)
+        {
+            _changeOperationProgress.Invoke(operation.progress);
+            yield return null;
+        }
     }
 
     public int LoadPlayer()

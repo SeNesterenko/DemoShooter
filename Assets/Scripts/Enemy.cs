@@ -16,8 +16,9 @@ public class Enemy : MonoBehaviour
     public void Initialize(Transform target)
     {
         _target = target;
-
         MoveToShootingRange(target);
+
+        _healthHandler.Initialize();
     }
 
     private void Update()
