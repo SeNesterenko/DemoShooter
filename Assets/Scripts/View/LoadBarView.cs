@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadBar : MonoBehaviour
+public class LoadBarView : MonoBehaviour
 {
     private Image _loadBar;
 

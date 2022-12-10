@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -5,6 +6,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _maxPitch = 15;
     [SerializeField] private float _minPitch = -15;
+    
+    [SerializeField] private CinemachineVirtualCamera _zoomCamera;
 
     private Transform _target;
     private float _pitch;
@@ -22,7 +25,26 @@ public class CameraController : MonoBehaviour
         return Mathf.Clamp(angle, min, max);
     }
 
-    private void LateUpdate()
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1) || Input.GetMouseButtonUp(1))
+        {
+            SwitchCameras();
+            HandlesUserInput();
+        }
+        else
+        {
+            HandlesUserInput();
+        }
+    }
+
+    private void SwitchCameras()
+    {
+        _zoomCamera.enabled = !_zoomCamera.enabled;
+        
+    }
+
+    private void HandlesUserInput()
     {
         var x = Input.GetAxis("Mouse X");
         var y = Input.GetAxis("Mouse Y");
