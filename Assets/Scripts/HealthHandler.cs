@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class HealthHandler : MonoBehaviour
 {
-    private bool _isAlive => _currentHealth > 0;
     public event Action Died;
     public event Action<float> GetDamage;
 
     [SerializeField] private float _startHealth;
 
     private float _currentHealth;
+    private bool _isAlive => _currentHealth > 0;
 
     public float Initialize()
     {

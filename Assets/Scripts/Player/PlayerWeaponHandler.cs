@@ -25,6 +25,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         {
             _weaponShot.Invoke();
             _showAnimationShoot.Invoke();
+            
             _playerWeapon.Shoot();
 
             _currentCountBullets--;

@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private Player[] _listPlayer;
     
-
     private void Awake()
     {
         Cursor.visible = false;

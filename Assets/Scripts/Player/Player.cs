@@ -21,10 +21,11 @@ public class Player : MonoBehaviour
         _playerAimController = GetComponent<PlayerAimController>();
         _healthBarView = GetComponent<HealthBarView>();
         
-        _healthHandler.Died += OnDied;
         var startHealth = _healthHandler.Initialize();
         _healthBarView.Initialize(startHealth);
+        
         _healthHandler.GetDamage += _healthBarView.ChangeHealthBar;
+        _healthHandler.Died += OnDied;
     }
 
     private void OnDied()
@@ -37,10 +38,9 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_healthHandler != null)
-        {
-            _healthHandler.Died -= OnDied;
-            _healthHandler.GetDamage -= _healthBarView.ChangeHealthBar;
-        }
+        if (_healthHandler == null) return;
+        
+        _healthHandler.Died -= OnDied;
+        _healthHandler.GetDamage -= _healthBarView.ChangeHealthBar;
     }
 }
